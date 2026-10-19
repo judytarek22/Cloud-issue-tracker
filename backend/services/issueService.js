@@ -11,10 +11,11 @@ return JSON.parse(text);
 } catch (error) {
 if (error.code == 'ENOENT') return [];
 throw error;
-
+}
+}
 async function writeIssues(issues) {
 await fs.writeFile(DATA_FILE, JSON.stringify(issues, null, 2));
-
+}
 async function createIssue(input) {
 const issues = await readIssues();
 const issue = {
@@ -31,11 +32,11 @@ issues.push(issue);
 await writeIssues(issues);
 return issue;
 }
+
 async function updateIssueStatus(id, status) {
 const issues = await readIssues();
 const issue = issues.find((item) => item.id === id);
 if (!issue) return null;
-};
 
 issue.status = status;
 await writeIssues(issues);
